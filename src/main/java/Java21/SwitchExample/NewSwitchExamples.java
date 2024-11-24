@@ -6,13 +6,35 @@ public class NewSwitchExamples {
 
         TestSwitch1 newObject = new TestSwitch1();
         TestSwitch2 newObject2 = new TestSwitch2();
+        User user = new User("1","Vikas");
+        User newUser = new User("1","Akash");
 
         expressionWithArrowLabels(); //This is South; NORTH
         instanceOfChecks(newObject);
         instanceOfChecks(newObject2);
         instanceOfChecks(null);
         instanceOfChecks(new Object());
+        System.out.println(extractValueAndCheck(user));
+        System.out.println(extractValueAndCheckOtherWay(newUser));
 
+    }
+
+    private static String extractValueAndCheckOtherWay(User user) {
+
+        if(user instanceof User(String id, String name) && name.equals("Vikas")){
+            return "Match Found";
+        }
+        else {
+            return "No Match";
+        }
+
+    }
+
+    private static String extractValueAndCheck(User user) {
+        return switch (user){ // first part is checking type and then condition
+          case User(String id, String name) when name.equals("Vikas") -> "Matched Case";
+            default -> throw new IllegalStateException("Unexpected value: " + user);
+        };
     }
 
     private static void instanceOfChecks(Object newObject) {
@@ -32,7 +54,7 @@ public class NewSwitchExamples {
             case null -> System.out.println("This is null"); //instanceOfChecks(null);
             case NewSwitchExamples a -> System.out.println("This is of Type NewSwitchExamples");
             case Number n -> System.out.println("This is of Type number");
-            case default -> System.out.println("This is default"); //instanceOfChecks(new Object());
+            default -> System.out.println("This is default"); //instanceOfChecks(new Object());
         }
 
 
